@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CharacterListView extends StatelessWidget {
-  final List<String> characters = [
+  final String searchValue;
+    final Function(String) onCharacterSelected;
+   const CharacterListView({Key? key, required this.searchValue, required this.onCharacterSelected})
+      : super(key: key);
+
+  
+  @override
+  Widget build(BuildContext context) {
+    final List<String> characters = [
     'A-Bomb',
     'Abe Sapien',
     'Abin Sur',
@@ -70,7 +78,6 @@ class CharacterListView extends StatelessWidget {
     'Batgirl IV',
     'Batgirl V',
     'Batgirl VI',
-    'Batman',
     'Batman',
     'Batman II',
     'Battlestar',
@@ -728,20 +735,24 @@ class CharacterListView extends StatelessWidget {
     'Zoom',
   ];
 
-  @override
-  Widget build(BuildContext context) {
+     List<String> filteredCharacters = characters
+        .where((character) => character.toLowerCase().contains(searchValue.toLowerCase()))
+        .toList();
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Character List'),
-      ),
       body: ListView.builder(
-        itemCount: characters.length,
+        itemCount: filteredCharacters.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(characters[index]),
+            title: Text(filteredCharacters[index]),
+            onTap: () {
+              // Llama a la función de selección cuando se toca un personaje
+              onCharacterSelected(filteredCharacters[index]);
+            },
           );
         },
       ),
     );
   }
 }
+

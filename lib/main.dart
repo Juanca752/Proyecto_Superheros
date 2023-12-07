@@ -10,10 +10,11 @@ class AppState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String name ='';
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => SuperherosProvider(),
+          create: (_) => SuperherosProvider(name),
           lazy: false,
         ),
         ChangeNotifierProvider(

@@ -1,7 +1,36 @@
 import 'dart:convert';
 
+List<Superheros> superherosFromJson(String str) =>
+List<Superheros>.from(json.decode(str).map((x) => Superheros.fromJson(x)));
 class Superheros {
     String response;
+    String resultsFor;
+    List<Result> results;
+
+    Superheros({
+        required this.response,
+        required this.resultsFor,
+        required this.results,
+    });
+
+    factory Superheros.fromRawJson(String str) => Superheros.fromJson(json.decode(str));
+
+    //String toRawJson() => json.encode(toJson());
+
+    factory Superheros.fromJson(Map<String, dynamic> json) => Superheros(
+        response: json["response"],
+        resultsFor: json["results-for"],
+        results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+    );
+/*
+    Map<String, dynamic> toJson() => {
+        "response": response,
+        "results-for": resultsFor,
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+    };*/
+}
+
+class Result {
     String id;
     String name;
     Powerstats powerstats;
@@ -11,8 +40,7 @@ class Superheros {
     Connections connections;
     Image image;
 
-    Superheros({
-        required this.response,
+    Result({
         required this.id,
         required this.name,
         required this.powerstats,
@@ -23,12 +51,11 @@ class Superheros {
         required this.image,
     });
 
-    factory Superheros.fromRawJson(String str) => Superheros.fromJson(json.decode(str));
+    factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    //String toRawJson() => json.encode(toJson());
 
-    factory Superheros.fromJson(Map<String, dynamic> json) => Superheros(
-        response: json["response"],
+    factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
         name: json["name"],
         powerstats: Powerstats.fromJson(json["powerstats"]),
@@ -39,8 +66,7 @@ class Superheros {
         image: Image.fromJson(json["image"]),
     );
 
-    Map<String, dynamic> toJson() => {
-        "response": response,
+    /*Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "powerstats": powerstats.toJson(),
@@ -49,7 +75,7 @@ class Superheros {
         "work": work.toJson(),
         "connections": connections.toJson(),
         "image": image.toJson(),
-    };
+    };*/
 }
 
 class Appearance {
@@ -71,7 +97,7 @@ class Appearance {
 
     factory Appearance.fromRawJson(String str) => Appearance.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    //String toRawJson() => json.encode(toJson());
 
     factory Appearance.fromJson(Map<String, dynamic> json) => Appearance(
         gender: json["gender"],
@@ -82,14 +108,14 @@ class Appearance {
         hairColor: json["hair-color"],
     );
 
-    Map<String, dynamic> toJson() => {
+    /*Map<String, dynamic> toJson() => {
         "gender": gender,
         "race": race,
         "height": List<dynamic>.from(height.map((x) => x)),
         "weight": List<dynamic>.from(weight.map((x) => x)),
         "eye-color": eyeColor,
         "hair-color": hairColor,
-    };
+    };*/
 }
 
 class Biography {
@@ -113,7 +139,7 @@ class Biography {
 
     factory Biography.fromRawJson(String str) => Biography.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    //String toRawJson() => json.encode(toJson());
 
     factory Biography.fromJson(Map<String, dynamic> json) => Biography(
         fullName: json["full-name"],
@@ -125,7 +151,7 @@ class Biography {
         alignment: json["alignment"],
     );
 
-    Map<String, dynamic> toJson() => {
+    /*Map<String, dynamic> toJson() => {
         "full-name": fullName,
         "alter-egos": alterEgos,
         "aliases": List<dynamic>.from(aliases.map((x) => x)),
@@ -133,7 +159,7 @@ class Biography {
         "first-appearance": firstAppearance,
         "publisher": publisher,
         "alignment": alignment,
-    };
+    };*/
 }
 
 class Connections {
@@ -147,17 +173,17 @@ class Connections {
 
     factory Connections.fromRawJson(String str) => Connections.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    //String toRawJson() => json.encode(toJson());
 
     factory Connections.fromJson(Map<String, dynamic> json) => Connections(
         groupAffiliation: json["group-affiliation"],
         relatives: json["relatives"],
     );
 
-    Map<String, dynamic> toJson() => {
+    /*Map<String, dynamic> toJson() => {
         "group-affiliation": groupAffiliation,
         "relatives": relatives,
-    };
+    };*/
 }
 
 class Image {
@@ -169,15 +195,15 @@ class Image {
 
     factory Image.fromRawJson(String str) => Image.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    //String toRawJson() => json.encode(toJson());
 
     factory Image.fromJson(Map<String, dynamic> json) => Image(
         url: json["url"],
     );
 
-    Map<String, dynamic> toJson() => {
+   /* Map<String, dynamic> toJson() => {
         "url": url,
-    };
+    };*/
 }
 
 class Powerstats {
@@ -199,7 +225,7 @@ class Powerstats {
 
     factory Powerstats.fromRawJson(String str) => Powerstats.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    //String toRawJson() => json.encode(toJson());
 
     factory Powerstats.fromJson(Map<String, dynamic> json) => Powerstats(
         intelligence: json["intelligence"],
@@ -210,14 +236,14 @@ class Powerstats {
         combat: json["combat"],
     );
 
-    Map<String, dynamic> toJson() => {
+   /* Map<String, dynamic> toJson() => {
         "intelligence": intelligence,
         "strength": strength,
         "speed": speed,
         "durability": durability,
         "power": power,
         "combat": combat,
-    };
+    };*/
 }
 
 class Work {
@@ -231,15 +257,15 @@ class Work {
 
     factory Work.fromRawJson(String str) => Work.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    //String toRawJson() => json.encode(toJson());
 
     factory Work.fromJson(Map<String, dynamic> json) => Work(
         occupation: json["occupation"],
         base: json["base"],
     );
 
-    Map<String, dynamic> toJson() => {
+    /*Map<String, dynamic> toJson() => {
         "occupation": occupation,
         "base": base,
-    };
+    };*/
 }

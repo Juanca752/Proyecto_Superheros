@@ -8,16 +8,15 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? selectedItem =
-        Provider.of<SelectedValueNotifier>(context).selectedValue;
-
+    String? selectedItem = Provider.of<SelectedValueNotifier>(context).selectedValue;
+    String name= selectedItem.toString();
+    //print(name);
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedItem ??
-            'Default Value'), // Aquí usamos el valor seleccionado como título.
+        title: Text(selectedItem ??   'Default Value'), // Aquí usamos el valor seleccionado como título.
       ),
       body: Center(
-        child: CustomFlipCard(),
+        child: CustomFlipCard(name),
       ),
     );
   }
