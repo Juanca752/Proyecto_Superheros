@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:superhero_beta/models/superheros.dart';
+import 'package:login_jc_2023/models/superheros.dart';
 
 class SuperherosProvider extends ChangeNotifier {
   final String _baseUrl = 'superheroapi.com';

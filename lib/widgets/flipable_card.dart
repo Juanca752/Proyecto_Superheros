@@ -2,7 +2,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart' as Flutter;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:superhero_beta/providers/providers.dart';
+import 'package:login_jc_2023/providers/providers.dart';
 
 import '../models/models.dart';
 
@@ -27,7 +27,7 @@ class _CustomFlipCardState extends State<CustomFlipCard> {
     superherosProvider.getOnCharacters(widget.name).then((_) {
       setState(() {
         superheros = superherosProvider.character;
-        print(superheros);
+        //print(superheros);
         imageUrl= superheros![0].image.url;
       });
     });
@@ -62,16 +62,27 @@ class _CustomFlipCardState extends State<CustomFlipCard> {
                    // Adjust the width as needed
                   fit: BoxFit.fill,
                 ),
-              Text('Para Ver infromacion detallada tocar la card',
-                  style: Theme.of(context).textTheme.bodyText1),
+                Container(height: 10,),
+              if (superheros == null)
+              Text('El personaje no está en la base de datos.',
+                  style: Theme.of(context).textTheme.bodyLarge),
+            if (superheros != null && superheros!.isEmpty)
+              Text('El personaje no tiene información disponible.',
+                  style: Theme.of(context).textTheme.bodyLarge),
+            Text('Para ver información detallada, toque la tarjeta.',
+                style: Theme.of(context).textTheme.bodyText1),
             ],
           ),
         ),
        back: Container(
-  decoration: BoxDecoration(
-    color: Colors.blueGrey,
-    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-  ),
+  decoration:  BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blue.shade400, Colors.green.shade200],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(8.0))
+          ),
   child: Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -123,8 +134,15 @@ class _CustomFlipCardState extends State<CustomFlipCard> {
           style: Theme.of(context).textTheme.bodyLarge),
       ],
       Container(height: 10,),
-        Text('Tocar Para Volver a la imagen',
-        style: Theme.of(context).textTheme.bodyLarge),
+      if (superheros == null)
+              Text('El personaje no está en la base de datos.',
+                  style: Theme.of(context).textTheme.bodyLarge),
+            if (superheros != null && superheros!.isEmpty)
+              Text('El personaje no tiene información disponible.',
+                  style: Theme.of(context).textTheme.bodyLarge),
+            Text('Tocar Para Volver a la imagen',
+             style: Theme.of(context).textTheme.bodyLarge),
+        
     ],
   ),
 ),

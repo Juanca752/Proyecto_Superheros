@@ -1,2 +1,2 @@
-export 'package:superhero_beta/providers/superheros_providers.dart';
-export 'package:superhero_beta/providers/selected_value_notifier.dart';
+export 'package:login_jc_2023/providers/superheros_providers.dart';
+export 'package:login_jc_2023/providers/selected_value_notifier.dart';
